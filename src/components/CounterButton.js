@@ -1,19 +1,22 @@
 import React, { Component } from 'react'
 import { css } from 'emotion'
 
-export default class ToggleButton extends Component {
+export default class CounterButton extends Component {
   render() {
     const buttonStyle = css`
+      display: flex;
+      justify-content: space-between;
       width: 400px;
       height: 40px;
       margin: 10px;
       font-size: 1.3em;
-      display: block;
       background: #eee;
     `
     return (
       <button className={buttonStyle} onClick={this.props.wasClicked}>
-        {this.props.text}
+        <box> - </box>
+        <span>{this.props.text}</span>
+        <box> + </box>
       </button>
     )
   }
