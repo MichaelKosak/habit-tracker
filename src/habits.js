@@ -9,7 +9,7 @@ export default [
 
   {
     text: 'Liter Wasser getrunken',
-    count: 0,
+    count: 5,
     id: 4,
     category: 'good'
   },

@@ -14,7 +14,6 @@ export default class CounterButton extends Component {
     `
     return (
       <div className={buttonStyle}>
-        <button onClick={this.props.onDecrease}> - </button>
         <span>
           {this.props.count} {this.props.text}
         </span>
