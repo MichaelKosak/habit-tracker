@@ -13,11 +13,13 @@ export default class CounterButton extends Component {
       background: #eee;
     `
     return (
-      <button className={buttonStyle} onClick={this.props.wasClicked}>
-        <box> - </box>
-        <span>{this.props.text}</span>
-        <box> + </box>
-      </button>
+      <div className={buttonStyle}>
+        <button onClick={this.props.onDecrease}> - </button>
+        <span>
+          {this.props.count} {this.props.text}
+        </span>
+        <button onClick={this.props.onIncrease}> + </button>
+      </div>
     )
   }
 }

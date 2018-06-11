@@ -12,7 +12,11 @@ export default class ToggleButton extends Component {
       background: #eee;
     `
     return (
-      <button className={buttonStyle} onClick={this.props.wasClicked}>
+      <button
+        className={buttonStyle}
+        onClick={this.props.wasClicked}
+        checked={this.props.checked}
+      >
         {this.props.text}
       </button>
     )
