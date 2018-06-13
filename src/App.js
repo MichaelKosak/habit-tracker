@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import CurrentDay from './components/CurrentDay'
 import Statistics from './components/Statistics'
 import habits from './habits'
+import { css } from 'emotion'
 
 class App extends Component {
   state = {
@@ -40,6 +41,20 @@ class App extends Component {
   }
   render() {
     //const habits = [...this.state.habits]
+    const boxStyle = css`
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100px;
+      height: 40px;
+      margin: 10px;
+      background: rgb(100, 123, 234);
+      border: 1px solid black;
+      border-radius: 10px;
+    `
+    const linksStyle = css`
+      display: flex;
+    `
 
     return (
       <Router>
@@ -58,9 +73,13 @@ class App extends Component {
             path="/Statistics"
             render={() => <Statistics habits={this.state.habits} />}
           />
-          <div>
-            <Link to="/">CurrentDay</Link>
-            <Link to="/Statistics">Statistics</Link>
+          <div className={linksStyle}>
+            <box className={boxStyle}>
+              <Link to="/">thisday</Link>
+            </box>
+            <box className={boxStyle}>
+              <Link to="/Statistics">Statistics</Link>
+            </box>
           </div>
         </section>
       </Router>
