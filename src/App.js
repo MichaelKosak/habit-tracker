@@ -1,23 +1,33 @@
 import React, { Component } from 'react'
-import ToggleButton from './components/ToggleButton'
-import CounterButton from './components/CounterButton'
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import CurrentDay from './components/CurrentDay'
+import Statistics from './components/Statistics'
 import habits from './habits'
+import { css } from 'emotion'
 
 class App extends Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      habits: habits
-    }
+  state = {
+    habits: habits
   }
+
+  increaseHabitCount(id) {
+    const habitIndex = this.state.habits.findIndex(habit => habit.id === id)
+    const habit = this.state.habits[habitIndex]
+    const newHabit = { ...habit, count: habit.count + 1 }
+    this.setState({
+      habits: [
+        ...this.state.habits.slice(0, habitIndex),
+        newHabit,
+        ...this.state.habits.slice(habitIndex + 1, this.state.habits.length)
+      ]
+    })
+  }
+
   toggleButton() {
     return null
   }
-  decreaseHabitCount(id) {
-    return null
-  }
-  increaseHabitCount(id) {
+
+  increaseHabitCount = id => {
     const habitIndex = this.state.habits.findIndex(habit => habit.id === id)
     const habit = this.state.habits[habitIndex]
     const newHabit = { ...habit, count: habit.count + 1 }
@@ -31,31 +41,48 @@ class App extends Component {
   }
   render() {
     //const habits = [...this.state.habits]
+    const boxStyle = css`
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100px;
+      height: 40px;
+      margin: 10px;
+      background: rgb(100, 123, 234);
+      border: 1px solid black;
+      border-radius: 10px;
+    `
+    const linksStyle = css`
+      display: flex;
+    `
 
     return (
-      <div>
-        {this.state.habits.map(habit => {
-          if (habit.checked != null) {
-            return (
-              <ToggleButton
-                text={habit.text}
-                key={habit.id}
-                checked={habit.checked}
+      <Router>
+        <section>
+          <Route
+            exact
+            path="/"
+            render={() => (
+              <CurrentDay
+                habits={this.state.habits}
+                onIncrease={this.increaseHabitCount}
               />
-            )
-          } else if (habit.count != null) {
-            return (
-              <CounterButton
-                text={habit.text}
-                key={habit.id}
-                count={habit.count}
-                onIncrease={e => this.increaseHabitCount(habit.id)}
-                onDecrease={e => this.decreaseHabitCount(habit.id)}
-              />
-            )
-          }
-        })}
-      </div>
+            )}
+          />
+          <Route
+            path="/Statistics"
+            render={() => <Statistics habits={this.state.habits} />}
+          />
+          <div className={linksStyle}>
+            <box className={boxStyle}>
+              <Link to="/">thisday</Link>
+            </box>
+            <box className={boxStyle}>
+              <Link to="/Statistics">Statistics</Link>
+            </box>
+          </div>
+        </section>
+      </Router>
     )
   }
 }
