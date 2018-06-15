@@ -66,6 +66,8 @@ class App extends Component {
               <CurrentDay
                 habits={this.state.habits}
                 onIncrease={this.increaseHabitCount}
+                history={this.state.history}
+                dayOffset={this.state.dayOffset}
               />
             )}
           />

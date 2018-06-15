@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import habits from '../habits'
 
 export default class Statistics extends Component {
   render() {
