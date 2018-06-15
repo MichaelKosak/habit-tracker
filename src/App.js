@@ -10,6 +10,7 @@ import { Provider } from 'react-redux'
 import { increaseHabitCount } from './actions'
 import reducer from './reducer'
 import initialState from './initialState'
+import StatisticsView from './containers/StatisticsView'
 
 const store = createStore(
   reducer,
@@ -51,10 +52,7 @@ class App extends Component {
         <Provider store={store}>
           <section>
             <Route exact path="/" render={() => <CurrentDayView />} />
-            <Route
-              path="/Statistics"
-              render={() => <Statistics habits={state.habits} />}
-            />
+            <Route path="/Statistics" render={() => <StatisticsView />} />
             <div className={linksStyle}>
               <box className={boxStyle}>
                 <Link to="/">thisday</Link>
