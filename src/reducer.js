@@ -1,5 +1,6 @@
 import { moveDayLeft } from './actions'
 import Actions from './actions'
+import { getCurrentDate } from './containers/CurrentDayView'
 
 export default (state, action) => {
   switch (action.type) {
@@ -29,8 +30,14 @@ export default (state, action) => {
       return { ...state, dayOffset: state.dayOffset - 1 }
 
     case Actions.UPDATE_HISTORY:
-      const { id, updateFunction } = action.payload
-      const oldEntries = state.history[this.currentDate] || {}
+      const currentDate = getCurrentDate(state)
+      const { id } = action.payload
+      const toggleFunction = oldValue => !oldValue
+      const counterFunction = oldValue => (oldValue ? oldValue + 1 : 1)
+      const updateFunction = isButtonACounter(id, state)
+        ? counterFunction
+        : toggleFunction
+      const oldEntries = state.history[currentDate] || {}
       const oldValue = oldEntries[id]
 
       const updatedEntries = {
@@ -39,10 +46,15 @@ export default (state, action) => {
       }
       return {
         ...state,
-        history: { ...state.history, [this.currentDate]: updatedEntries }
+        history: { ...state.history, [currentDate]: updatedEntries }
       }
 
     default:
       return state
   }
+}
+
+function isButtonACounter(id, state) {
+  const habit = state.habits.find(habit => habit.id === id)
+  return habit.type === 'counter'
 }

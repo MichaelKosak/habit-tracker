@@ -23,20 +23,21 @@ class CurrentDay extends Component {
         />
         <div>
           {this.props.habits.map(habit => {
-            if (habit.checked != null) {
+            if (habit.type === 'toggle') {
               return (
                 <ToggleButton
                   text={habit.text}
                   key={habit.id}
-                  checked={habit.checked}
+                  onClick={() => this.props.onToggle(habit.id)}
+                  checked={habit.value}
                 />
               )
-            } else if (habit.count != null) {
+            } else if (habit.type === 'counter') {
               return (
                 <CounterButton
                   text={habit.text}
                   key={habit.id}
-                  count={habit.count}
+                  count={habit.value}
                   onIncrease={() => this.props.onIncrease(habit.id)}
                 />
               )

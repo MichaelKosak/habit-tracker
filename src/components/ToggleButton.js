@@ -9,13 +9,17 @@ export default class ToggleButton extends Component {
       margin: 10px;
       font-size: 1.3em;
       display: block;
-      background: #eee;
+      background: grey;
     `
+
+    const blueButtonStyle = css`
+      background: blue;
+    `
+
     return (
       <button
-        className={buttonStyle}
-        onClick={this.props.wasClicked}
-        checked={this.props.checked}
+        className={`${buttonStyle} ${this.props.checked && blueButtonStyle}`}
+        onClick={this.props.onClick}
       >
         {this.props.text}
       </button>
