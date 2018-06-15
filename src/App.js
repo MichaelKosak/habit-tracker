@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
-import CurrentDay from './components/CurrentDay'
+import CurrentDayView from './containers/CurrentDayView'
 import Statistics from './components/Statistics'
 import habits from './habits'
 import { css } from 'emotion'
@@ -48,32 +48,23 @@ class App extends Component {
 
     return (
       <Router>
-        <section>
-          <Route
-            exact
-            path="/"
-            render={() => (
-              <CurrentDay
-                habits={state.habits}
-                onIncrease={this.increaseHabitCount}
-                history={state.history}
-                dayOffset={state.dayOffset}
-              />
-            )}
-          />
-          <Route
-            path="/Statistics"
-            render={() => <Statistics habits={state.habits} />}
-          />
-          <div className={linksStyle}>
-            <box className={boxStyle}>
-              <Link to="/">thisday</Link>
-            </box>
-            <box className={boxStyle}>
-              <Link to="/Statistics">Statistics</Link>
-            </box>
-          </div>
-        </section>
+        <Provider store={store}>
+          <section>
+            <Route exact path="/" render={() => <CurrentDayView />} />
+            <Route
+              path="/Statistics"
+              render={() => <Statistics habits={state.habits} />}
+            />
+            <div className={linksStyle}>
+              <box className={boxStyle}>
+                <Link to="/">thisday</Link>
+              </box>
+              <box className={boxStyle}>
+                <Link to="/Statistics">Statistics</Link>
+              </box>
+            </div>
+          </section>
+        </Provider>
       </Router>
     )
   }
