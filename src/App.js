@@ -4,26 +4,33 @@ import CurrentDay from './components/CurrentDay'
 import Statistics from './components/Statistics'
 import habits from './habits'
 import { css } from 'emotion'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+
+import { increaseHabitCount } from './actions'
+import reducer from './reducer'
+import initialState from './initialState'
+
+const store = createStore(
+  reducer,
+  initialState,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+)
 
 class App extends Component {
-  state = {
-    habits: habits
-  }
-
-  increaseHabitCount = id => {
-    const habitIndex = this.state.habits.findIndex(habit => habit.id === id)
-    const habit = this.state.habits[habitIndex]
-    const newHabit = { ...habit, count: habit.count + 1 }
-    this.setState({
-      habits: [
-        ...this.state.habits.slice(0, habitIndex),
-        newHabit,
-        ...this.state.habits.slice(habitIndex + 1, this.state.habits.length)
-      ]
+  componentDidMount() {
+    store.subscribe(() => {
+      this.forceUpdate()
     })
   }
 
+  increaseHabitCount = id => {
+    store.dispatch(increaseHabitCount(id))
+  }
+
   render() {
+    const state = store.getState()
+
     const boxStyle = css`
       display: flex;
       justify-content: center;
@@ -47,16 +54,16 @@ class App extends Component {
             path="/"
             render={() => (
               <CurrentDay
-                habits={this.state.habits}
+                habits={state.habits}
                 onIncrease={this.increaseHabitCount}
-                history={this.state.history}
-                dayOffset={this.state.dayOffset}
+                history={state.history}
+                dayOffset={state.dayOffset}
               />
             )}
           />
           <Route
             path="/Statistics"
-            render={() => <Statistics habits={this.state.habits} />}
+            render={() => <Statistics habits={state.habits} />}
           />
           <div className={linksStyle}>
             <box className={boxStyle}>
