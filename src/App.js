@@ -19,19 +19,7 @@ const store = createStore(
 )
 
 class App extends Component {
-  componentDidMount() {
-    store.subscribe(() => {
-      this.forceUpdate()
-    })
-  }
-
-  increaseHabitCount = id => {
-    store.dispatch(increaseHabitCount(id))
-  }
-
   render() {
-    const state = store.getState()
-
     const boxStyle = css`
       display: flex;
       justify-content: center;
@@ -51,14 +39,14 @@ class App extends Component {
       <Router>
         <Provider store={store}>
           <section>
-            <Route exact path="/" render={() => <CurrentDayView />} />
-            <Route path="/Statistics" render={() => <StatisticsView />} />
+            <Route exact path="/" component={CurrentDayView} />
+            <Route path="/statistics" component={StatisticsView} />
             <div className={linksStyle}>
               <box className={boxStyle}>
                 <Link to="/">thisday</Link>
               </box>
               <box className={boxStyle}>
-                <Link to="/Statistics">Statistics</Link>
+                <Link to="/statistics">Statistics</Link>
               </box>
             </div>
           </section>

@@ -28,6 +28,20 @@ export default (state, action) => {
     case Actions.PREV_DAY:
       return { ...state, dayOffset: state.dayOffset - 1 }
 
+    case Actions.UPDATE_HISTORY:
+      const { id, updateFunction } = action.payload
+      const oldEntries = state.history[this.currentDate] || {}
+      const oldValue = oldEntries[id]
+
+      const updatedEntries = {
+        ...oldEntries,
+        [id]: updateFunction(oldValue)
+      }
+      return {
+        ...state,
+        history: { ...state.history, [this.currentDate]: updatedEntries }
+      }
+
     default:
       return state
   }
