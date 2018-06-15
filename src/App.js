@@ -10,23 +10,6 @@ class App extends Component {
     habits: habits
   }
 
-  increaseHabitCount(id) {
-    const habitIndex = this.state.habits.findIndex(habit => habit.id === id)
-    const habit = this.state.habits[habitIndex]
-    const newHabit = { ...habit, count: habit.count + 1 }
-    this.setState({
-      habits: [
-        ...this.state.habits.slice(0, habitIndex),
-        newHabit,
-        ...this.state.habits.slice(habitIndex + 1, this.state.habits.length)
-      ]
-    })
-  }
-
-  toggleButton() {
-    return null
-  }
-
   increaseHabitCount = id => {
     const habitIndex = this.state.habits.findIndex(habit => habit.id === id)
     const habit = this.state.habits[habitIndex]
@@ -39,8 +22,8 @@ class App extends Component {
       ]
     })
   }
+
   render() {
-    //const habits = [...this.state.habits]
     const boxStyle = css`
       display: flex;
       justify-content: center;

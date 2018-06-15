@@ -41,6 +41,7 @@ class CurrentDay extends Component {
       dayOffset: this.state.dayOffset + 1
     })
   }
+
   render() {
     const dateSwitchStyles = css`
       position: absolute;
