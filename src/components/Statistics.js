@@ -2,15 +2,25 @@ import React, { Component } from 'react'
 
 export default class Statistics extends Component {
   render() {
-    return this.props.habits.map(habit => {
-      if (habit.count != null) {
-        return (
+    const { history, habits } = this.props
+    return Object.keys(history).map(dateKey => {
+      const dateEntries = history[dateKey]
+      return (
+        <div key={dateKey}>
+          <h3>{dateKey}</h3>
           <div>
-            {habit.count}
-            {habit.text}
+            {Object.keys(dateEntries).map(habitId => {
+              const habitEntry = dateEntries[habitId]
+              const habit = habits.find(habit => habit.id === habitId)
+              return (
+                <div key={dateKey + habitId}>
+                  {habit.text} {habit.type === 'counter' && `(${habitEntry})`}
+                </div>
+              )
+            })}
           </div>
-        )
-      }
+        </div>
+      )
     })
   }
 }
