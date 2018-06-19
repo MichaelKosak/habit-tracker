@@ -4,17 +4,27 @@ import CurrentDayView from './containers/CurrentDayView'
 import Statistics from './components/Statistics'
 import habits from './habits'
 import { css } from 'emotion'
-import { createStore } from 'redux'
 import { Provider } from 'react-redux'
+import { useLocalStorage } from './middleware'
+import { createStore, applyMiddleware } from 'redux'
 
 import { increaseHabitCount } from './actions'
 import reducer from './reducer'
 import initialState from './initialState'
 import StatisticsView from './containers/StatisticsView'
 
+const getInitialState = () => {
+  const savedState = localStorage.getItem('state')
+  if (savedState) {
+    return JSON.parse(savedState)
+  } else {
+    return initialState
+  }
+}
 const store = createStore(
   reducer,
-  initialState,
+  getInitialState(),
+  applyMiddleware(useLocalStorage),
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )
 
