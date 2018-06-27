@@ -33,9 +33,9 @@ export default (state, action) => {
       const currentDate = getCurrentDate(state)
       const { id } = action.payload
       const toggleFunction = oldValue => !oldValue
-      const counterFunction = oldValue => (oldValue ? oldValue + 1 : 1)
+      const increaseFunction = oldValue => (oldValue ? oldValue + 1 : 1)
       const updateFunction = isButtonACounter(id, state)
-        ? counterFunction
+        ? increaseFunction
         : toggleFunction
       const oldEntries = state.history[currentDate] || {}
       const oldValue = oldEntries[id]

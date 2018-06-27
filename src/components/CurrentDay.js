@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
+import { css } from 'emotion'
+import styled from 'react-emotion'
+
 import DateSwitch from './DateSwitch'
 import CounterButton from './CounterButton'
 import ToggleButton from './ToggleButton'
-import { css } from 'emotion'
+import Footer from './Footer'
 
 class CurrentDay extends Component {
   render() {
@@ -12,8 +15,28 @@ class CurrentDay extends Component {
       top: 0;
       right: 0;
     `
+    const Liste = css`
+      display: flex;
+      justify-content: center;
+    `
+
+    const Scroller = styled('div')`
+      overflow-y: scroll;
+    `
+    const Grid = styled('section')`
+      display: grid;
+      grid-template-rows: 91px 40px auto 91px;
+      height: 100vh;
+    `
+
+    const Header = styled('header')`
+      background-image: url(/static/media/header.0575ac55.svg);
+      background-size: cover;
+    `
+
     return (
-      <React.Fragment>
+      <Grid>
+        <Header />
         <DateSwitch
           className={dateSwitchStyles}
           text={this.props.currentDate}
@@ -21,30 +44,36 @@ class CurrentDay extends Component {
           onRight={this.props.moveDayRight}
           isToday={this.props.dayOffset === 0}
         />
-        <div>
+        <Scroller>
           {this.props.habits.map(habit => {
             if (habit.type === 'toggle') {
               return (
-                <ToggleButton
-                  text={habit.text}
-                  key={habit.id}
-                  onClick={() => this.props.onToggle(habit.id)}
-                  checked={habit.value}
-                />
+                <div className={Liste}>
+                  <ToggleButton
+                    text={habit.text}
+                    key={habit.id}
+                    onClick={() => this.props.onToggle(habit.id)}
+                    checked={habit.value}
+                  />
+                </div>
               )
             } else if (habit.type === 'counter') {
               return (
-                <CounterButton
-                  text={habit.text}
-                  key={habit.id}
-                  count={habit.value}
-                  onIncrease={() => this.props.onIncrease(habit.id)}
-                />
+                <div className={Liste}>
+                  <CounterButton
+                    text={habit.text}
+                    key={habit.id}
+                    count={habit.value}
+                    onIncrease={() => this.props.onIncrease(habit.id)}
+                    onDecrease={() => this.props.onDecrease(habit.id)}
+                  />
+                </div>
               )
             }
           })}
-        </div>
-      </React.Fragment>
+        </Scroller>
+        <Footer />
+      </Grid>
     )
   }
 }

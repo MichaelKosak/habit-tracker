@@ -1,17 +1,20 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
-import CurrentDayView from './containers/CurrentDayView'
-import Statistics from './components/Statistics'
-import habits from './habits'
-import { css } from 'emotion'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { Provider } from 'react-redux'
-import { useLocalStorage } from './middleware'
 import { createStore, applyMiddleware } from 'redux'
+import { css } from 'emotion'
+import styled from 'react-emotion'
 
-import { increaseHabitCount } from './actions'
+import { useLocalStorage } from './middleware'
 import reducer from './reducer'
 import initialState from './initialState'
+
+import CurrentDayView from './containers/CurrentDayView'
 import StatisticsView from './containers/StatisticsView'
+
+import SVGHeader from './components/HabitTrackerHeader'
+
+import headerImage from './images/header.svg'
 
 const getInitialState = () => {
   const savedState = localStorage.getItem('state')
@@ -30,36 +33,13 @@ const store = createStore(
 
 class App extends Component {
   render() {
-    const boxStyle = css`
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 100px;
-      height: 40px;
-      margin: 10px;
-      background: rgb(100, 123, 234);
-      border: 1px solid black;
-      border-radius: 10px;
-    `
-    const linksStyle = css`
-      display: flex;
-    `
-
     return (
       <Router>
         <Provider store={store}>
-          <section>
+          <React.Fragment>
             <Route exact path="/" component={CurrentDayView} />
             <Route path="/statistics" component={StatisticsView} />
-            <div className={linksStyle}>
-              <box className={boxStyle}>
-                <Link to="/">thisday</Link>
-              </box>
-              <box className={boxStyle}>
-                <Link to="/statistics">Statistics</Link>
-              </box>
-            </div>
-          </section>
+          </React.Fragment>
         </Provider>
       </Router>
     )

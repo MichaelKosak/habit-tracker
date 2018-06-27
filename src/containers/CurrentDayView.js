@@ -43,6 +43,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   onIncrease: id => dispatch(updateHistory(id)),
+  onDecrease: id => dispatch(updateHistory(id)),
   onToggle: id => dispatch(updateHistory(id)),
   moveDayLeft: () => dispatch(moveDayLeft()),
   moveDayRight: () => dispatch(moveDayRight())

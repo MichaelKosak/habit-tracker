@@ -4,16 +4,22 @@ import { css } from 'emotion'
 export default class ToggleButton extends Component {
   render() {
     const buttonStyle = css`
-      width: 400px;
-      height: 40px;
-      margin: 10px;
+      background: white;
       font-size: 1.3em;
-      display: block;
-      background: grey;
+      font-weight: 700;
+      border: 1px solid black;
+      border-radius: 5px;
+      color: #412551;
+      width: 95%;
+      height: 70px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      margin-top: 10px;
     `
 
     const blueButtonStyle = css`
-      background: blue;
+      background: #9aff54;
     `
 
     return (
