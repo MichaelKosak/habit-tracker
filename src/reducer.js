@@ -31,10 +31,11 @@ export default (state, action) => {
 
     case Actions.UPDATE_HISTORY:
       const currentDate = getCurrentDate(state)
-      const { id } = action.payload
+      const { id, valueToAdd } = action.payload
       const toggleFunction = oldValue => !oldValue
-      const increaseFunction = oldValue => (oldValue ? oldValue + 1 : 1)
-      const updateFunction = isButtonACounter(id, state)
+      const increaseFunction = oldValue =>
+        oldValue ? oldValue + valueToAdd : 1
+      const updateFunctionPlus = isButtonACounter(id, state)
         ? increaseFunction
         : toggleFunction
       const oldEntries = state.history[currentDate] || {}
@@ -42,7 +43,7 @@ export default (state, action) => {
 
       const updatedEntries = {
         ...oldEntries,
-        [id]: updateFunction(oldValue)
+        [id]: updateFunctionPlus(oldValue)
       }
       return {
         ...state,

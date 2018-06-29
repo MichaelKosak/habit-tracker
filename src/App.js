@@ -12,10 +12,6 @@ import initialState from './initialState'
 import CurrentDayView from './containers/CurrentDayView'
 import StatisticsView from './containers/StatisticsView'
 
-import SVGHeader from './components/HabitTrackerHeader'
-
-import headerImage from './images/header.svg'
-
 const getInitialState = () => {
   const savedState = localStorage.getItem('state')
   if (savedState) {

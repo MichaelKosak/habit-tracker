@@ -13,7 +13,7 @@ export default class CounterButton extends Component {
       width: 95%;
       height: 70px;
       display: flex;
-      justify-content: space-around;
+      justify-content: space-between;
       align-items: center;
       margin-top: 10px;
     `
@@ -28,6 +28,7 @@ export default class CounterButton extends Component {
       justify-content: center;
       align-items: center;
       cursor: pointer;
+      margin-left: 7px;
     `
     const smallButtonRight = css`
       background: rgba(0, 200, 100, 1);
@@ -38,6 +39,7 @@ export default class CounterButton extends Component {
       justify-content: center;
       align-items: center;
       cursor: pointer;
+      margin-right: 7px;
     `
     const minusSize = css`
       border: 2px solid red;

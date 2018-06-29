@@ -23,12 +23,12 @@ export function moveDayLeft() {
     type: Actions.PREV_DAY
   }
 }
-export function updateHistory(id, updateFunction) {
+export function updateHistory(id, valueToAdd) {
   return {
     type: Actions.UPDATE_HISTORY,
     payload: {
       id,
-      updateFunction
+      valueToAdd
     }
   }
 }

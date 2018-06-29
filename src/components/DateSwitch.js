@@ -7,7 +7,7 @@ const StyledButton = styled('section')`
   align-items: center;
   justify-content: space-between;
   height: 40px;
-  background: #fff;
+  font-size: 17px;
 `
 
 const SideButton = styled('button')`
@@ -17,8 +17,8 @@ const SideButton = styled('button')`
   width: 40px;
   height: 100%;
   border: none;
-  background: #eee;
-  font-size: 1.3em;
+  background: #d2f2f6;
+  font-size: 2em;
 `
 
 const DateText = styled('span')`

@@ -21,9 +21,9 @@ const linkContainerStyle = css`
     position: absolute;
     left: 0;
     right: 0;
-    height: 20px;
+    height: 15px;
     bottom: 100%;
-    background: linear-gradient(transparent, aliceblue);
+    background: linear-gradient(transparent, #d2f2f6);
   }
 
   &.active {
@@ -36,7 +36,7 @@ const StyledLink = styled(NavLink)`
   border: 1px solid black;
   border-radius: 10px;
   font-size: 20px;
-  font-weight: 500;
+  font-weight: bold;
   padding: 20px;
   &.active {
     color: white;

@@ -7,6 +7,8 @@ import CounterButton from './CounterButton'
 import ToggleButton from './ToggleButton'
 import Footer from './Footer'
 
+import headerImage from '../images/header.svg'
+
 class CurrentDay extends Component {
   render() {
     const dateSwitchStyles = css`
@@ -30,7 +32,7 @@ class CurrentDay extends Component {
     `
 
     const Header = styled('header')`
-      background-image: url(/static/media/header.0575ac55.svg);
+      background-image: url(${headerImage});
       background-size: cover;
     `
 
